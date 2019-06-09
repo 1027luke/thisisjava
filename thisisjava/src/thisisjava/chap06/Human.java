@@ -18,7 +18,6 @@ public class Human {
 		m_age = age;
 		m_sex = sex;
 		m_name = name;
-		
 		m_hp = 100;
 		m_int = 10;
 	}
