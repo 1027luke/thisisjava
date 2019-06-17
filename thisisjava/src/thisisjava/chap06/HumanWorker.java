@@ -3,11 +3,14 @@ package thisisjava.chap06;
 import java.util.Scanner;
 
 public class HumanWorker {
-	int m_hp; 
-	int m_mp;
-	int m_money; 
-	int m_survivalDay;
-	Scanner m_in;
+	public int m_hp; 
+	public int m_mp;
+	public int m_money; 
+	public int m_survivalDay;
+	public  String m_race;
+	
+
+
 
 	HumanWorker(){
 
@@ -15,10 +18,10 @@ public class HumanWorker {
 		m_mp=10;
 		m_money=100;
 		m_survivalDay=1;
-		m_in = new Scanner(System.in);
+		
 
 	}
-	void PrintStatus(){
+	public void PrintStatus(){
 
 		System.out.println("hp:" + m_hp);
 		System.out.println("mp:" + m_mp);
@@ -30,16 +33,17 @@ public class HumanWorker {
 		System.out.println("1.eat" +"2.sleep" +"3.work");
 	}
 
-	int RecieveActions(){
-		
+	int RecieveActions(Scanner scanner){
+
 		int action = 0;
-		if(m_in.hasNextInt()){
-			action = m_in.nextInt();
+		if(scanner.hasNextInt()){
+			action = scanner.nextInt();
 		}
-			
+
 
 		return action;
 	}
+	
 
 	void ExecuteActions(int action){
 		switch(action){
@@ -71,9 +75,11 @@ public class HumanWorker {
 	void sleep(){
 		m_mp= m_mp+2;
 		m_money= m_money-2;
+		m_survivalDay=m_survivalDay+1;
 		System.out.println("You slept!");
 		System.out.println("Your mp was increased by 2");
 		System.out.println("Your moneny was decreased by 2");
+		System.out.println("New day begins");
 	}
 	void work(){
 		m_money= m_money+2;
@@ -84,6 +90,8 @@ public class HumanWorker {
 		System.out.println("Your mp was decreased by 2");
 		System.out.println("YOur hp was increased by 2");
 	}
+	
+	
 	int CheckEndCondition(){
 
 		if(m_hp<=0){
@@ -105,5 +113,10 @@ public class HumanWorker {
 		else {
 			return 0;
 		}
+	}
+
+
+	String getRace(){
+		return m_race;
 	}
 }
