@@ -8,7 +8,7 @@ public class HumanWorker {
 	public int m_money; 
 	public int m_survivalDay;
 	public  String m_race;
-	
+	public double m_workMastery;
 
 
 
@@ -30,7 +30,7 @@ public class HumanWorker {
 	}
 	void PrintActions(){
 		System.out.println("Please enter what actions you will make the worker to take");
-		System.out.println("1.eat" +"2.sleep" +"3.work");
+		System.out.println("1.eat" +" 2.sleep" +" 3.work"+" 4.gamble" );
 	}
 
 	int RecieveActions(Scanner scanner){
@@ -45,7 +45,7 @@ public class HumanWorker {
 	}
 	
 
-	void ExecuteActions(int action){
+	void ExecuteActions(int action,Scanner scanner){
 		switch(action){
 
 		case 1:
@@ -59,7 +59,11 @@ public class HumanWorker {
 		case 3:
 			work();
 			break;
-
+		
+		case 4:
+			gamble(scanner);
+			break;
+			
 		default:
 			System.out.println("Action undefined:" + action);
 			break;
@@ -82,7 +86,8 @@ public class HumanWorker {
 		System.out.println("New day begins");
 	}
 	void work(){
-		m_money= m_money+2;
+		m_money=(int) (m_money+m_workMastery);
+		m_workMastery= 1.1*m_workMastery;
 		m_mp= m_mp-2;
 		m_hp= m_hp-2;
 		System.out.println("You worked!");
@@ -90,16 +95,34 @@ public class HumanWorker {
 		System.out.println("Your mp was decreased by 2");
 		System.out.println("YOur hp was increased by 2");
 	}
+	void gamble(Scanner scanner){
+		System.out.println("Choose your game:"+" 1.Rock,Papaer,Scissors"+" 2.Black Jack") ;
+		int action=0;
+		if(scanner.hasNextInt()){
+			action = scanner.nextInt();
+		}
+		if(action==1){
+			System.out.println("Let's play Rock,Paper,Scissors");
+			HumanGamble gamble= new HumanGamble();
+			gamble.RockPaperScissors();
+		}
+		else if(action==2){
+			System.out.println("Let's play Black Jack");
+		}
+		
+		
+	}
 	
 	
 	int CheckEndCondition(){
 
 		if(m_hp<=0){
-
+			
+			System.out.println("You died");
 			return -1;
 		}
 		else if(m_mp<=0){
-
+			System.out.println("You died");
 			return -2;
 		}
 		else if(m_money<=0){
@@ -107,7 +130,7 @@ public class HumanWorker {
 			return -3;
 		}
 		else if(m_survivalDay>=100){
-
+			System.out.println("Victory");
 			return -4;
 		}
 		else {

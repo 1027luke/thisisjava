@@ -6,6 +6,7 @@ public class EuropeanWorker extends HumanWorker{
 		m_race="European";
 		m_hp=15;
 		m_mp=15;
+		m_workMastery=2;
 	}
 	public void PrintEuropeanGreetings(){
 		System.out.println("Hi");

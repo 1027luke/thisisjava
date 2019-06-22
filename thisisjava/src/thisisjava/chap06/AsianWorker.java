@@ -5,5 +5,6 @@ public class AsianWorker extends HumanWorker {
 		
 		m_race="Asian";
 		m_money=120;
+		m_workMastery=3;
 	}
 }

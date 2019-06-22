@@ -1,10 +1,11 @@
-package thisisjava.chap06;
+package thisisjava.chap06; //encapsulates gorup of classes
 
-import java.util.Scanner;
+import java.io.IOException; //import from this library
+import java.util.Scanner;	// import from this library
 
-public class LifeOfWorkerMain { 
+public class LifeOfWorkerMain { //creates class called LifeOfWorkerMain 
 
-	public static void main(String[] args) { 
+	public static void main(String[] args) { //runs program in this method
 
 		// TODO Auto-generated method stub
 		/*1. Print greetings
@@ -16,67 +17,66 @@ public class LifeOfWorkerMain {
 		 * 6. Check end conditon
 		 * */
 		//1. Print greetings
-		Scanner scanner= new Scanner(System.in);
-		System.out.println("Welcome to Life of a worker");
-		System.out.println("Please choose your race"+ " 1.Asian" + " 2.European" + " 3.African");
-		int RaceOption=0;
-		HumanWorker worker1= null;
+		Scanner scanner= new Scanner(System.in); //creates scanner class
+		System.out.println("Welcome to Life of a worker"); //print this string
+		System.out.println("Please choose your race"+ " 1.Asian" + " 2.European" + " 3.African"); //print this string
+		int RaceOption=0; //declares int type variable RaceOption
+		HumanWorker worker1= null; //
 
 
-		 
-		while (true){
-			if(scanner.hasNextInt()){
-				RaceOption = scanner.nextInt();
+
+		while (true){ //enters while loop
+			if(scanner.hasNextInt()){ //입력갑이있을떄로 if문 조건을 제한
+				RaceOption = scanner.nextInt(); //위 조건이 맞을시 실행
 			}
-			if (RaceOption==1){
+			if (RaceOption==1){ //입력값이 1일때
 
-				worker1= new AsianWorker();
-				break;
+				worker1= new AsianWorker(); //
+				break; //escapes loop
 			}
-			else if (RaceOption==2){
+			else if (RaceOption==2){ //
 
-				worker1 = new EuropeanWorker();
-				break;
-			}
-
-			else if (RaceOption==3){
-
-				worker1= new AfricanWorker();
-				
-				break;
+				worker1 = new EuropeanWorker(); //
+				break; //escapes loop
 			}
 
-			else {
-				System.out.println("Invalid Option");
+			else if (RaceOption==3){ //
+
+				worker1= new AfricanWorker(); //
+
+				break; //escapes loop
+			}
+
+			else { //if input value satisfies none of the conditions 
+				System.out.println("Invalid Option"); //print this string
 
 			}
 		}
-			
-		
+
+
 		//2. Create worker & print Worker's current status
-		System.out.println(worker1.m_survivalDay);
-		System.out.println(worker1.m_hp);
-		System.out.println("Race="+worker1.getRace());
-		while (true){
+		System.out.println(worker1.m_survivalDay); //print value m_survivalday
+		System.out.println(worker1.m_hp); //print value m_hp
+		System.out.println("Race="+worker1.getRace()); //print string "Race" and input value  
+		while (true){ //enters while loop everytime
 
 
-			worker1.PrintStatus();
+			worker1.PrintStatus(); 
 
 			//3. Print what actions you want to make worker do
 			worker1.PrintActions();	
 
 			//4. Recieve input from user (action)
-			int action= worker1.RecieveActions(scanner);
+			int action= worker1.RecieveActions(scanner); //declares int type variable "action" &스캐너 값 호출
 
 			//5. Execute the action
-			worker1.ExecuteActions(action);
+			worker1.ExecuteActions(action,scanner); //스캐너랑 ㅇ
 			//6. Check end conditon
 			int condition = worker1.CheckEndCondition();
 
-			if (condition<0){
-				break;
-			}
+			if (condition<0){  
+				break; //escape
+			} 
 		}
 	}
-
 }
