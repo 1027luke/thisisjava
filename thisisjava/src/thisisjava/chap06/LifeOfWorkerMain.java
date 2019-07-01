@@ -1,11 +1,11 @@
 package thisisjava.chap06; //encapsulates gorup of classes
 
-import java.io.IOException; //import from this library
+import java.io.IOException; //import from this library (소스코드 없다고 봐도 무방)
 import java.util.Scanner;	// import from this library
 
 public class LifeOfWorkerMain { //creates class called LifeOfWorkerMain 
 
-	public static void main(String[] args) { //runs program in this method
+	public static void main(String[] args) { //runs program in this method 스태틱이 있어야 실행가능 (프로그램이 시작 동시에 메모리에 올라가게 된다)
 
 		// TODO Auto-generated method stub
 		/*1. Print greetings
@@ -18,17 +18,16 @@ public class LifeOfWorkerMain { //creates class called LifeOfWorkerMain
 		 * */
 		//1. Print greetings
 		Scanner scanner= new Scanner(System.in); //creates scanner class
-		System.out.println("Welcome to Life of a worker"); //print this string
+		System.out.println("Welcome to Life of a worker"); //system이란 변수가 이미 선언됬음 print this string
 		System.out.println("Please choose your race"+ " 1.Asian" + " 2.European" + " 3.African"); //print this string
 		int RaceOption=0; //declares int type variable RaceOption
-		HumanWorker worker1= null; //
+		HumanWorker worker1= null; // worker1이라는 변수 생성, 오브젝트는 아님
+		
 
 
 
 		while (true){ //enters while loop
-			if(scanner.hasNextInt()){ //입력갑이있을떄로 if문 조건을 제한
-				RaceOption = scanner.nextInt(); //위 조건이 맞을시 실행
-			}
+			RaceOption= ConsoleInputFetcher.GetPositiveInt();
 			if (RaceOption==1){ //입력값이 1일때
 
 				worker1= new AsianWorker(); //
@@ -60,17 +59,16 @@ public class LifeOfWorkerMain { //creates class called LifeOfWorkerMain
 		System.out.println("Race="+worker1.getRace()); //print string "Race" and input value  
 		while (true){ //enters while loop everytime
 
-
 			worker1.PrintStatus(); 
 
 			//3. Print what actions you want to make worker do
 			worker1.PrintActions();	
 
 			//4. Recieve input from user (action)
-			int action= worker1.RecieveActions(scanner); //declares int type variable "action" &스캐너 값 호출
+			int action= worker1.RecieveActions(); //declares int type variable "action" &스캐너 값 호출
 
 			//5. Execute the action
-			worker1.ExecuteActions(action,scanner); //스캐너랑 ㅇ
+			worker1.ExecuteActions(action); //스캐너랑 ㅇ
 			//6. Check end conditon
 			int condition = worker1.CheckEndCondition();
 

@@ -33,19 +33,13 @@ public class HumanWorker {
 		System.out.println("1.eat" +" 2.sleep" +" 3.work"+" 4.gamble" );
 	}
 
-	int RecieveActions(Scanner scanner){
+	int RecieveActions(){
 
-		int action = 0;
-		if(scanner.hasNextInt()){
-			action = scanner.nextInt();
-		}
-
-
-		return action;
+		return ConsoleInputFetcher.GetPositiveInt();
 	}
 	
 
-	void ExecuteActions(int action,Scanner scanner){
+	void ExecuteActions(int action){
 		switch(action){
 
 		case 1:
@@ -61,7 +55,7 @@ public class HumanWorker {
 			break;
 		
 		case 4:
-			gamble(scanner);
+			gamble();
 			break;
 			
 		default:
@@ -95,16 +89,32 @@ public class HumanWorker {
 		System.out.println("Your mp was decreased by 2");
 		System.out.println("YOur hp was increased by 2");
 	}
-	void gamble(Scanner scanner){
+	void gamble(){
 		System.out.println("Choose your game:"+" 1.Rock,Papaer,Scissors"+" 2.Black Jack") ;
 		int action=0;
-		if(scanner.hasNextInt()){
-			action = scanner.nextInt();
-		}
+		action=ConsoleInputFetcher.GetPositiveInt();
 		if(action==1){
 			System.out.println("Let's play Rock,Paper,Scissors");
+			/*System.out.println("Please select among rock, papaer, or scissors");
+			System.out.println("1.Rock 2.Paper 3. Scissors");*/
 			HumanGamble gamble= new HumanGamble();
-			gamble.RockPaperScissors();
+			System.out.println("Please select amount of money you want to bet:");
+			int betMoney=0;
+			betMoney=ConsoleInputFetcher.GetPositiveInt();
+			int gameResult= gamble.RockPaperScissors();
+				if(gameResult==1){
+					System.out.println("win!");
+					m_money=m_money+betMoney;
+				}
+				else if (gameResult==2){
+					System.out.println("draw!");
+				}
+				else if (gameResult==3){
+					System.out.println("defeat!");
+					m_money=m_money-betMoney;
+				}
+			//이겼을경우 배팅의 두배, 비겼을경우 그대로, 졌을경우 배팅금액만큼 -
+			// int배팅하면 2배의 돈을 m_money에 넣어줌, 지면 배팅한 금액만큼 m_money-, 비길시 변화없음 (if문으로 구현)
 		}
 		else if(action==2){
 			System.out.println("Let's play Black Jack");
