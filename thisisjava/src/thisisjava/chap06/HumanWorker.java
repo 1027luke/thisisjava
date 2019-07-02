@@ -18,7 +18,7 @@ public class HumanWorker {
 		m_mp=10;
 		m_money=100;
 		m_survivalDay=1;
-		
+
 
 	}
 	public void PrintStatus(){
@@ -37,7 +37,7 @@ public class HumanWorker {
 
 		return ConsoleInputFetcher.GetPositiveInt();
 	}
-	
+
 
 	void ExecuteActions(int action){
 		switch(action){
@@ -53,11 +53,11 @@ public class HumanWorker {
 		case 3:
 			work();
 			break;
-		
+
 		case 4:
 			gamble();
 			break;
-			
+
 		default:
 			System.out.println("Action undefined:" + action);
 			break;
@@ -98,36 +98,52 @@ public class HumanWorker {
 			/*System.out.println("Please select among rock, papaer, or scissors");
 			System.out.println("1.Rock 2.Paper 3. Scissors");*/
 			HumanGamble gamble= new HumanGamble();
-			System.out.println("Please select amount of money you want to bet:");
-			int betMoney=0;
-			betMoney=ConsoleInputFetcher.GetPositiveInt();
-			int gameResult= gamble.RockPaperScissors();
-				if(gameResult==1){
-					System.out.println("win!");
-					m_money=m_money+betMoney;
-				}
-				else if (gameResult==2){
-					System.out.println("draw!");
-				}
-				else if (gameResult==3){
-					System.out.println("defeat!");
-					m_money=m_money-betMoney;
-				}
+			System.out.println("Please the amount of money you want to bet:");
+			int betMoney1=0;
+			betMoney1=ConsoleInputFetcher.GetPositiveInt();
+			int gameResult1= gamble.RockPaperScissors();
+			if(gameResult1==1){
+				System.out.println("win!");
+				m_money=m_money+betMoney1;
+			}
+			else if (gameResult1==2){
+				System.out.println("draw!");
+			}
+			else if (gameResult1==3){
+				System.out.println("defeat!");
+				m_money=m_money-betMoney1;
+			}
 			//이겼을경우 배팅의 두배, 비겼을경우 그대로, 졌을경우 배팅금액만큼 -
 			// int배팅하면 2배의 돈을 m_money에 넣어줌, 지면 배팅한 금액만큼 m_money-, 비길시 변화없음 (if문으로 구현)
 		}
 		else if(action==2){
 			System.out.println("Let's play Black Jack");
+			System.out.println("Please enter the of money you want to bet:");
+			BlackJack bjack= new BlackJack();
+			int betMoney2=0;
+			betMoney2=ConsoleInputFetcher.GetPositiveInt();
+			int gameResult2= bjack.DrawCard();
+			if(gameResult2==1){
+				System.out.println("win!");
+				m_money=m_money+betMoney2;
+			}
+			else if (gameResult2==2){
+				System.out.println("draw!");
+			}
+			else if (gameResult2==3){
+				System.out.println("defeat!");
+				m_money=m_money-betMoney2;
+			}
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	int CheckEndCondition(){
 
 		if(m_hp<=0){
-			
+
 			System.out.println("You died");
 			return -1;
 		}
